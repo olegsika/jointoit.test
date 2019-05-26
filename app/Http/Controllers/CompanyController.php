@@ -12,6 +12,7 @@ class CompanyController extends Controller
 
     public function __construct(ICompanyRepository $companyRepository)
     {
+        $this->middleware('auth');
         $this->companyRepository = $companyRepository;
     }
 
