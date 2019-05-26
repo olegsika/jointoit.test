@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 
 use App\Company;
+use App\Notifications\SendEmail;
 use App\Repositories\Interfaces\ICompanyRepository;
 
 class CompanyRepository implements ICompanyRepository
@@ -32,12 +33,14 @@ class CompanyRepository implements ICompanyRepository
             $path = $request->file('logo')->store('', 'public');
         }
 
-        Company::create([
+        $company = Company::create([
             'name' => $request->name,
             'email' => $request->email,
             'logo' => $path,
             'website' => $request->website,
         ]);
+        $company->email = $request->email;
+        $company->notify(new SendEmail());
 
         return redirect()->route('companies.index');
     }
