@@ -25,5 +25,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        $this->app->bind('App\Repositories\Interfaces\ICompanyRepository', 'App\Repositories\CompanyRepository');
+        $this->app->bind('App\Repositories\Interfaces\IEmployeeRepository', 'App\Repositories\EmployeeRepository');
     }
 }

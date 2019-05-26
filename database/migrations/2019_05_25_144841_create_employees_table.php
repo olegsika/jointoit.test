@@ -20,7 +20,7 @@ class CreateEmployeesTable extends Migration
             $table->unsignedBigInteger('company_id')->nullable();
             $table->foreign('company_id')->references('id')->on('companies');
             $table->string('email');
-            $table->integer('phone');
+            $table->string('phone');
             $table->timestamps();
         });
     }
